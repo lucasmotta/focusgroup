@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Toolbar Focusgroup</title>
+  <script src="/dist/index.global.js"></script>
+</head>
+<body>
+  <button id="before">Before</button>
+
+  <div id="toolbar" focusgroup="toolbar" aria-label="Text Formatting">
+    <button id="btn-bold">Bold</button>
+    <button id="btn-italic">Italic</button>
+    <button id="btn-underline">Underline</button>
+  </div>
+
+  <button id="after">After</button>
+
+  <!-- Toolbar with wrap -->
+  <div id="toolbar-wrap" focusgroup="toolbar wrap" aria-label="Wrapped Toolbar">
+    <button id="wrap-a">A</button>
+    <button id="wrap-b">B</button>
+    <button id="wrap-c">C</button>
+  </div>
+
+  <!-- Toolbar with nested non-focusable elements -->
+  <div id="toolbar-nested" focusgroup="toolbar" aria-label="Nested Toolbar">
+    <div>
+      <button id="nested-a">A</button>
+      <button id="nested-b">B</button>
+    </div>
+    <span>
+      <button id="nested-c">C</button>
+    </span>
+  </div>
+</body>
+</html>

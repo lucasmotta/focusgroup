@@ -1,0 +1,36 @@
+{
+  "name": "focusgroup-polyfill",
+  "version": "0.1.0",
+  "description": "Polyfill for the HTML focusgroup attribute (Open UI proposal)",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "browser": "dist/index.global.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "jsdom": "^25.0.0",
+    "serve": "^14.2.6",
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "license": "MIT"
+}
