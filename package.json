@@ -42,7 +42,6 @@
     "provenance": true
   },
   "scripts": {
-    "prepare": "lefthook install",
     "build": "make build",
     "test": "vitest run",
     "test:watch": "vitest",
