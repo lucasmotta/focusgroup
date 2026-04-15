@@ -1,5 +1,7 @@
-![focusgroup-polyfill](./assets/logo-dark.svg#gh-dark-mode-only)
-![focusgroup-polyfill](./assets/logo-light.svg#gh-light-mode-only)
+<p align="center">
+  <img src="./assets/logo-light.svg#gh-light-mode-only" alt="focusgroup-polyfill" width="96" />
+  <img src="./assets/logo-dark.svg#gh-dark-mode-only" alt="focusgroup-polyfill" width="96" />
+</p>
 
 # focusgroup-polyfill
 
