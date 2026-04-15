@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link
-      href="https://api.fontshare.com/v2/css?f[]=recia@500&f[]=switzer@400,500&f[]=jet-brains-mono@400,500&display=swap"
+      href="https://api.fontshare.com/v2/css?f[]=switzer@400,401&f[]=jet-brains-mono@400&f[]=recia@400&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -65,7 +65,7 @@
         --radius-sm: 6px;
         --font: "Switzer", -apple-system, sans-serif;
         --font-display: "Recia", "Switzer", -apple-system, serif;
-        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
         --shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 
         /* Spacing scale (based on 1rem = 16px) */
@@ -142,6 +142,7 @@
         line-height: 1.5;
         color: var(--text);
         background: var(--bg);
+        font-synthesis: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
@@ -232,7 +233,7 @@
 
       kbd {
         display: inline-block;
-        font-family: var(--mono);
+        font-family: var(--font-mono);
         font-size: var(--text-xs);
         font-weight: 500;
         padding: var(--space-1) var(--space-3);
@@ -258,7 +259,7 @@
       }
 
       .example-header h2 {
-        font-family: var(--font-display);
+        font-family: var(--font);
         font-size: var(--text-md);
         font-weight: 500;
         color: var(--text);
@@ -266,9 +267,9 @@
       }
 
       .example-header code {
-        font-family: var(--mono);
+        font-family: var(--font-mono);
         font-size: var(--text-xs);
-        color: var(--text-tertiary);
+        color: var(--text-secondary);
         background: var(--code-bg);
         padding: var(--space-1) var(--space-4);
         border-radius: var(--space-2);
@@ -282,12 +283,19 @@
         box-shadow: var(--shadow);
         display: grid;
         align-items: center;
+
+        @supports (corner-shape: squircle) {
+          border-radius: 24px;
+          corner-shape: squircle;
+        }
       }
 
       .example-note {
+        font-family: var(--font);
         font-size: var(--text-sm);
         color: var(--text-tertiary);
         margin-top: var(--space-4);
+        letter-spacing: 0.05rem;
         font-style: italic;
       }
 
@@ -435,7 +443,7 @@
         background: transparent;
         color: var(--text-secondary);
         border: none;
-        border-right: 1px solid var(--border);
+        box-shadow: inset -1px 0 0 var(--border);
         cursor: pointer;
         transition:
           background 0.1s,
@@ -447,7 +455,7 @@
         border-radius: 5px 0 0 5px;
       }
       .pill-item:last-child {
-        border-right: none;
+        box-shadow: none;
         border-radius: 0 5px 5px 0;
       }
 
@@ -457,7 +465,8 @@
 
       .pill-item:focus-visible {
         outline: var(--outline-width) solid var(--text-secondary);
-        outline-offset: 0;
+        outline-offset: 0px;
+        box-shadow: none;
         z-index: 1;
         position: relative;
       }
@@ -489,23 +498,30 @@
         font-weight: 500;
         letter-spacing: 0.02em;
         padding: var(--space-5) var(--space-4);
-        border: var(--outline-width) solid transparent;
+        border: 0;
+        background-color: var(--swatch);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--swatch) 80%, var(--text));
         border-radius: var(--radius-sm);
         cursor: pointer;
         outline: none;
         transition: border-color 0.15s;
         text-align: center;
         color: #fff;
+
+        @supports (corner-shape: squircle) {
+          border-radius: 999px;
+          corner-shape: squircle;
+        }
       }
 
       .color-swatch.is-light {
         color: #171717;
-        border-color: var(--border);
       }
 
       .color-swatch:focus-visible {
-        outline: var(--outline-width) solid var(--text);
-        outline-offset: 1px;
+        --outline-color: color-mix(in srgb, var(--swatch) 50%, var(--text));
+        outline: var(--outline-width) solid var(--outline-color);
+        outline-offset: -1px;
       }
 
       .emoji-grid {
@@ -528,6 +544,11 @@
         cursor: pointer;
         outline: none;
         transition: background 0.1s;
+
+        @supports (corner-shape: squircle) {
+          border-radius: 999px;
+          corner-shape: squircle;
+        }
       }
 
       .emoji-cell:hover {
@@ -537,7 +558,7 @@
       .emoji-cell:focus-visible {
         background: var(--focus-bg);
         outline: var(--outline-width) solid var(--text-secondary);
-        outline-offset: calc(-1 * var(--outline-width));
+        outline-offset: -1px;
         z-index: 1;
         position: relative;
       }
@@ -598,7 +619,7 @@
         right: 0;
         background: var(--log-bg);
         border-top: 1px solid var(--border);
-        font-family: var(--mono);
+        font-family: var(--font-mono);
         font-size: var(--text-xs);
         color: var(--log-text);
         height: 36px;
@@ -832,18 +853,18 @@
           </div>
           <div class="example-body">
             <div focusgroup="grid wrap" role="grid" aria-label="Color Palette" class="color-grid">
-              <button class="color-swatch" style="background: #ef4444">Red</button>
-              <button class="color-swatch" style="background: #f97316">Orange</button>
-              <button class="color-swatch" style="background: #eab308">Yellow</button>
-              <button class="color-swatch" style="background: #22c55e">Green</button>
-              <button class="color-swatch" focusgroupstart style="background: #3b82f6">Blue</button>
-              <button class="color-swatch" style="background: #8b5cf6">Purple</button>
-              <button class="color-swatch" style="background: #ec4899">Pink</button>
-              <button class="color-swatch" style="background: #6b7280">Gray</button>
-              <button class="color-swatch" style="background: #171717">Black</button>
-              <button class="color-swatch is-light" style="background: #fafafa">White</button>
-              <button class="color-swatch" style="background: #92400e">Brown</button>
-              <button class="color-swatch" style="background: #0891b2">Teal</button>
+              <button class="color-swatch" style="--swatch: #ef4444">Red</button>
+              <button class="color-swatch" style="--swatch: #f97316">Orange</button>
+              <button class="color-swatch" style="--swatch: #eab308">Yellow</button>
+              <button class="color-swatch" style="--swatch: #22c55e">Green</button>
+              <button class="color-swatch" focusgroupstart style="--swatch: #3b82f6">Blue</button>
+              <button class="color-swatch" style="--swatch: #8b5cf6">Purple</button>
+              <button class="color-swatch" style="--swatch: #ec4899">Pink</button>
+              <button class="color-swatch" style="--swatch: #6b7280">Gray</button>
+              <button class="color-swatch" style="--swatch: #171717">Black</button>
+              <button class="color-swatch is-light" style="--swatch: #fafafa">White</button>
+              <button class="color-swatch" style="--swatch: #92400e">Brown</button>
+              <button class="color-swatch" style="--swatch: #0891b2">Teal</button>
             </div>
           </div>
           <p class="example-note">2D arrows, wraps within rows and columns</p>
