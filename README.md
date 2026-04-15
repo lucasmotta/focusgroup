@@ -186,29 +186,46 @@ Each focusgroup navigates independently. The inner toolbar's arrow keys don't af
 
 ## Playground
 
-Run the playground locally:
-
 ```bash
 npm install
-npm run build
-npx serve . -l 3000
+npm run dev:site
 ```
 
-Then open [http://localhost:3000/playground.html](http://localhost:3000/playground.html).
+Opens at [http://localhost:8787](http://localhost:8787).
 
 ## Development
 
 ```bash
 npm install
-npm run build        # Build ESM, CJS, and IIFE bundles
-npm test             # Unit tests (Vitest)
-npm run test:e2e     # E2E tests (Playwright)
-npm run typecheck    # TypeScript check
+npm run build         # Build ESM, CJS, and IIFE bundles
+npm test              # Unit tests (Vitest)
+npm run test:e2e      # E2E tests (Playwright)
+npm run typecheck     # TypeScript check
+npm run lint          # oxlint
+npm run format        # oxfmt (write)
+npm run format:check  # oxfmt (check only)
+npm run ci            # Run the full CI pipeline locally
 ```
+
+## Releasing
+
+Releases are managed by [Changesets](https://github.com/changesets/changesets).
+
+**For contributors** — add a changeset to every PR that touches user-facing code:
+
+```bash
+npx changeset
+```
+
+The CLI asks for the semver bump (`patch` / `minor` / `major`) and a short summary. It writes a `.changeset/<random>.md` file — commit it with your PR.
+
+For internal-only changes (CI tweaks, refactors with no user impact), use `npx changeset --empty` so the check passes without producing a version bump.
+
+**Release flow** (maintainer) — merging to `main` with pending changesets causes the release bot to open a "Version Packages" PR that bumps the version and updates `CHANGELOG.md`. Merging that PR publishes to npm and creates a GitHub release.
 
 ## Browser support
 
-The polyfill targets ES2020 and works in all modern browsers. Playwright tests run against Chromium, Firefox, and WebKit.
+The polyfill targets ES2020 and works in all modern browsers. Playwright tests run against Chromium.
 
 ## License
 
