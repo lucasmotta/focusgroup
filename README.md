@@ -188,7 +188,7 @@ Each focusgroup navigates independently. The inner toolbar's arrow keys don't af
 
 ```bash
 npm install
-npm run dev:site
+npm run dev
 ```
 
 Opens at [http://localhost:8787](http://localhost:8787).

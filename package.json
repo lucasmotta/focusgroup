@@ -52,7 +52,7 @@
     "format:check": "oxfmt --check",
     "ci": "make ci",
     "site": "make site",
-    "dev:site": "make dev-site",
+    "dev": "make dev-site",
     "prepublishOnly": "npm run build",
     "changeset": "changeset",
     "version": "changeset version",
