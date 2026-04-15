@@ -29,10 +29,36 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Decide whether the release action should run:
+      # - If there are pending changesets → run (will open/update Version PR)
+      # - Else, if the current package.json version is NOT on npm → run (will publish)
+      # - Else → skip (chore commits where version is already published)
+      - name: Should release run?
+        id: gate
+        run: |
+          pending=$(find .changeset -maxdepth 1 -type f -name '*.md' ! -name 'README.md' | head -n1)
+          if [ -n "$pending" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Pending changesets found — will open/update Version PR."
+            exit 0
+          fi
+
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "$name@$version is already published — nothing to do."
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "$name@$version is not yet published — will publish."
+          fi
+
       - name: Build
+        if: steps.gate.outputs.run == 'true'
         run: npm run build
 
       - name: Create release PR or publish to npm
+        if: steps.gate.outputs.run == 'true'
         uses: changesets/action@v1
         with:
           publish: npm run release
