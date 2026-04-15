@@ -9,6 +9,7 @@ let observer: MutationObserver | null = null;
 let rescanQueued = false;
 
 export function init(): void {
+  if (typeof document === "undefined") return;
   if (registry) return;
 
   registry = new FocusgroupRegistry();

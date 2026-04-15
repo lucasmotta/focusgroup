@@ -37,6 +37,14 @@ import "focusgroup-polyfill";
 
 The polyfill auto-initializes on import. It's a no-op if the browser supports `focusgroup` natively.
 
+### Next.js (App Router)
+
+For [Next.js App Router](https://nextjs.org/docs/app), add an [`instrumentation-client.ts`](https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation-client) file at the project root (or under `src/` if that is where your app lives). Next.js **15.3+** is required for this convention.
+
+```ts
+import "focusgroup-polyfill";
+```
+
 ### Manual control
 
 ```js
