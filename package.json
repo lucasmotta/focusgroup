@@ -57,6 +57,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "changeset publish",
+    "deploy": "make deploy",
     "clean": "make clean"
   },
   "devDependencies": {
