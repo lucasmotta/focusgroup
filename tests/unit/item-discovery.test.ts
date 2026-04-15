@@ -1,12 +1,12 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { discoverItems } from '../../src/item-discovery.js';
+import { describe, it, expect, beforeEach } from "vitest";
+import { discoverItems } from "../../src/item-discovery.js";
 
-describe('discoverItems', () => {
+describe("discoverItems", () => {
   beforeEach(() => {
-    document.body.innerHTML = '';
+    document.body.innerHTML = "";
   });
 
-  it('discovers direct child buttons', () => {
+  it("discovers direct child buttons", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar">
         <button>A</button>
@@ -14,13 +14,13 @@ describe('discoverItems', () => {
         <button>C</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(3);
-    expect(items.map((el) => el.textContent)).toEqual(['A', 'B', 'C']);
+    expect(items.map((el) => el.textContent)).toEqual(["A", "B", "C"]);
   });
 
-  it('discovers nested focusable descendants', () => {
+  it("discovers nested focusable descendants", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar">
         <div>
@@ -32,12 +32,12 @@ describe('discoverItems', () => {
         <button>C</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(3);
   });
 
-  it('skips non-focusable elements', () => {
+  it("skips non-focusable elements", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar">
         <span>Not focusable</span>
@@ -46,12 +46,12 @@ describe('discoverItems', () => {
         <button>B</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(2);
   });
 
-  it('skips disabled elements', () => {
+  it("skips disabled elements", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar">
         <button>A</button>
@@ -59,12 +59,12 @@ describe('discoverItems', () => {
         <button>C</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(2);
   });
 
-  it('skips hidden elements', () => {
+  it("skips hidden elements", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar">
         <button>A</button>
@@ -72,7 +72,7 @@ describe('discoverItems', () => {
         <button>C</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(2);
   });
@@ -87,13 +87,13 @@ describe('discoverItems', () => {
         <button>C</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(2);
-    expect(items.map((el) => el.textContent)).toEqual(['A', 'C']);
+    expect(items.map((el) => el.textContent)).toEqual(["A", "C"]);
   });
 
-  it('skips nested focusgroup subtrees', () => {
+  it("skips nested focusgroup subtrees", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar">
         <button>A</button>
@@ -103,10 +103,10 @@ describe('discoverItems', () => {
         <button>C</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(2);
-    expect(items.map((el) => el.textContent)).toEqual(['A', 'C']);
+    expect(items.map((el) => el.textContent)).toEqual(["A", "C"]);
   });
 
   it('includes elements with tabindex="0"', () => {
@@ -116,16 +116,16 @@ describe('discoverItems', () => {
         <button>A</button>
       </div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(2);
   });
 
-  it('returns empty array for empty container', () => {
+  it("returns empty array for empty container", () => {
     document.body.innerHTML = `
       <div id="fg" focusgroup="toolbar"></div>
     `;
-    const container = document.getElementById('fg')!;
+    const container = document.getElementById("fg")!;
     const items = discoverItems(container);
     expect(items).toHaveLength(0);
   });

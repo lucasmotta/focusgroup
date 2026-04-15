@@ -1,0 +1,8 @@
+dist
+public
+node_modules
+test-results
+playwright-report
+.wrangler
+package-lock.json
+assets

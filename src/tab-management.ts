@@ -1,5 +1,5 @@
-import type { FocusgroupInstance } from './focusgroup-instance.js';
-import type { FocusgroupSegment } from './types.js';
+import type { FocusgroupInstance } from "./focusgroup-instance.js";
+import type { FocusgroupSegment } from "./types.js";
 
 // Store original tabindex values so we can restore on teardown
 const originalTabindex = new WeakMap<HTMLElement, string | null>();
@@ -18,17 +18,14 @@ function applyTabindexToSegment(segment: FocusgroupSegment): void {
   for (let i = 0; i < segment.items.length; i++) {
     const item = segment.items[i];
     saveOriginalTabindex(item);
-    item.setAttribute('tabindex', i === segment.tabStopIndex ? '0' : '-1');
+    item.setAttribute("tabindex", i === segment.tabStopIndex ? "0" : "-1");
   }
 }
 
 /**
  * Update roving tabindex when an item receives focus.
  */
-export function onItemFocused(
-  item: HTMLElement,
-  instance: FocusgroupInstance,
-): void {
+export function onItemFocused(item: HTMLElement, instance: FocusgroupInstance): void {
   const segment = instance.getSegmentContaining(item);
   if (!segment) return;
 
@@ -45,13 +42,13 @@ export function onItemFocused(
 
   // Apply tabindex changes
   for (let i = 0; i < segment.items.length; i++) {
-    segment.items[i].setAttribute('tabindex', i === idx ? '0' : '-1');
+    segment.items[i].setAttribute("tabindex", i === idx ? "0" : "-1");
   }
 }
 
 function saveOriginalTabindex(el: HTMLElement): void {
   if (!originalTabindex.has(el)) {
-    originalTabindex.set(el, el.getAttribute('tabindex'));
+    originalTabindex.set(el, el.getAttribute("tabindex"));
   }
 }
 
@@ -63,9 +60,9 @@ export function restoreTabindex(instance: FocusgroupInstance): void {
     for (const item of segment.items) {
       const original = originalTabindex.get(item);
       if (original === null || original === undefined) {
-        item.removeAttribute('tabindex');
+        item.removeAttribute("tabindex");
       } else {
-        item.setAttribute('tabindex', original);
+        item.setAttribute("tabindex", original);
       }
       originalTabindex.delete(item);
     }

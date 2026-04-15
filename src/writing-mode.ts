@@ -1,4 +1,4 @@
-import type { FocusgroupConfig, DirectionMap } from './types.js';
+import type { FocusgroupConfig, DirectionMap } from "./types.js";
 
 /**
  * Resolve logical directions (inline/block) to physical arrow keys
@@ -9,21 +9,23 @@ export function resolveDirectionMap(
   config: FocusgroupConfig,
 ): DirectionMap {
   const style = getComputedStyle(container);
-  const writingMode = style.writingMode || 'horizontal-tb';
-  const direction = style.direction || 'ltr';
+  const writingMode = style.writingMode || "horizontal-tb";
+  const direction = style.direction || "ltr";
 
-  const { inlineForward, inlineBackward, blockForward, blockBackward } =
-    getPhysicalDirections(writingMode, direction);
+  const { inlineForward, inlineBackward, blockForward, blockBackward } = getPhysicalDirections(
+    writingMode,
+    direction,
+  );
 
   const forward: string[] = [];
   const backward: string[] = [];
 
-  if (config.direction === 'inline' || config.direction === 'both') {
+  if (config.direction === "inline" || config.direction === "both") {
     forward.push(inlineForward);
     backward.push(inlineBackward);
   }
 
-  if (config.direction === 'block' || config.direction === 'both') {
+  if (config.direction === "block" || config.direction === "both") {
     forward.push(blockForward);
     backward.push(blockBackward);
   }
@@ -38,44 +40,41 @@ interface PhysicalDirections {
   blockBackward: string;
 }
 
-function getPhysicalDirections(
-  writingMode: string,
-  direction: string,
-): PhysicalDirections {
+function getPhysicalDirections(writingMode: string, direction: string): PhysicalDirections {
   switch (writingMode) {
-    case 'vertical-rl':
-    case 'sideways-rl':
+    case "vertical-rl":
+    case "sideways-rl":
       return {
-        inlineForward: 'ArrowDown',
-        inlineBackward: 'ArrowUp',
-        blockForward: 'ArrowLeft',
-        blockBackward: 'ArrowRight',
+        inlineForward: "ArrowDown",
+        inlineBackward: "ArrowUp",
+        blockForward: "ArrowLeft",
+        blockBackward: "ArrowRight",
       };
 
-    case 'vertical-lr':
-    case 'sideways-lr':
+    case "vertical-lr":
+    case "sideways-lr":
       return {
-        inlineForward: 'ArrowDown',
-        inlineBackward: 'ArrowUp',
-        blockForward: 'ArrowRight',
-        blockBackward: 'ArrowLeft',
+        inlineForward: "ArrowDown",
+        inlineBackward: "ArrowUp",
+        blockForward: "ArrowRight",
+        blockBackward: "ArrowLeft",
       };
 
-    case 'horizontal-tb':
+    case "horizontal-tb":
     default:
-      if (direction === 'rtl') {
+      if (direction === "rtl") {
         return {
-          inlineForward: 'ArrowLeft',
-          inlineBackward: 'ArrowRight',
-          blockForward: 'ArrowDown',
-          blockBackward: 'ArrowUp',
+          inlineForward: "ArrowLeft",
+          inlineBackward: "ArrowRight",
+          blockForward: "ArrowDown",
+          blockBackward: "ArrowUp",
         };
       }
       return {
-        inlineForward: 'ArrowRight',
-        inlineBackward: 'ArrowLeft',
-        blockForward: 'ArrowDown',
-        blockBackward: 'ArrowUp',
+        inlineForward: "ArrowRight",
+        inlineBackward: "ArrowLeft",
+        blockForward: "ArrowDown",
+        blockBackward: "ArrowUp",
       };
   }
 }

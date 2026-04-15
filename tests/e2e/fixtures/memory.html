@@ -1,29 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Memory Focusgroup</title>
-  <script src="/dist/index.global.js"></script>
-</head>
-<body>
-  <button id="before">Before</button>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Memory Focusgroup</title>
+    <script src="/dist/index.global.js"></script>
+  </head>
+  <body>
+    <button id="before">Before</button>
 
-  <!-- Toolbar with memory (default) -->
-  <div id="toolbar-memory" focusgroup="toolbar" aria-label="With Memory">
-    <button id="mem-a">A</button>
-    <button id="mem-b">B</button>
-    <button id="mem-c">C</button>
-  </div>
+    <!-- Toolbar with memory (default) -->
+    <div id="toolbar-memory" focusgroup="toolbar" aria-label="With Memory">
+      <button id="mem-a">A</button>
+      <button id="mem-b">B</button>
+      <button id="mem-c">C</button>
+    </div>
 
-  <button id="middle">Middle</button>
+    <button id="middle">Middle</button>
 
-  <!-- Toolbar without memory + focusgroupstart -->
-  <div id="toolbar-nomemory" focusgroup="toolbar nomemory" aria-label="No Memory">
-    <button id="nomem-a">A</button>
-    <button id="nomem-b" focusgroupstart>B</button>
-    <button id="nomem-c">C</button>
-  </div>
+    <!-- Toolbar without memory + focusgroupstart -->
+    <div id="toolbar-nomemory" focusgroup="toolbar nomemory" aria-label="No Memory">
+      <button id="nomem-a">A</button>
+      <button id="nomem-b" focusgroupstart>B</button>
+      <button id="nomem-c">C</button>
+    </div>
 
-  <button id="after">After</button>
-</body>
+    <button id="after">After</button>
+  </body>
 </html>

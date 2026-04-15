@@ -32,7 +32,7 @@ npm install focusgroup-polyfill
 ### ES module
 
 ```js
-import 'focusgroup-polyfill'
+import "focusgroup-polyfill";
 ```
 
 The polyfill auto-initializes on import. It's a no-op if the browser supports `focusgroup` natively.
@@ -40,13 +40,13 @@ The polyfill auto-initializes on import. It's a no-op if the browser supports `f
 ### Manual control
 
 ```js
-import { init, destroy, isSupported } from 'focusgroup-polyfill'
+import { init, destroy, isSupported } from "focusgroup-polyfill";
 
 if (!isSupported()) {
-  init()
+  init();
 
   // Later, to tear down:
-  destroy()
+  destroy();
 }
 ```
 
@@ -54,46 +54,46 @@ if (!isSupported()) {
 
 The first token in the `focusgroup` attribute specifies the behavior:
 
-| Behavior | Navigation | Default modifiers | Roles applied |
-|---|---|---|---|
-| `toolbar` | Left/Right | `inline` | `toolbar` |
-| `tablist` | Left/Right, wraps | `inline wrap` | `tablist` → `tab` |
-| `radiogroup` | All arrows, wraps | `wrap` | `radiogroup` → `radio` |
-| `listbox` | Up/Down | `block` | `listbox` → `option` |
-| `menu` | Up/Down, wraps | `block wrap` | `menu` → `menuitem` |
-| `menubar` | Left/Right, wraps | `inline wrap` | `menubar` → `menuitem` |
-| `tree` | Up/Down | `block` | `tree` → `treeitem` |
-| `grid` | 2D arrows | — | — |
+| Behavior     | Navigation        | Default modifiers | Roles applied          |
+| ------------ | ----------------- | ----------------- | ---------------------- |
+| `toolbar`    | Left/Right        | `inline`          | `toolbar`              |
+| `tablist`    | Left/Right, wraps | `inline wrap`     | `tablist` → `tab`      |
+| `radiogroup` | All arrows, wraps | `wrap`            | `radiogroup` → `radio` |
+| `listbox`    | Up/Down           | `block`           | `listbox` → `option`   |
+| `menu`       | Up/Down, wraps    | `block wrap`      | `menu` → `menuitem`    |
+| `menubar`    | Left/Right, wraps | `inline wrap`     | `menubar` → `menuitem` |
+| `tree`       | Up/Down           | `block`           | `tree` → `treeitem`    |
+| `grid`       | 2D arrows         | —                 | —                      |
 
 ## Modifiers
 
 Add modifiers after the behavior token, separated by spaces:
 
 ```html
-<div focusgroup="toolbar wrap nomemory">
+<div focusgroup="toolbar wrap nomemory"></div>
 ```
 
-| Modifier | Effect |
-|---|---|
-| `inline` | Restrict to inline-axis arrows (Left/Right in LTR) |
-| `block` | Restrict to block-axis arrows (Up/Down in horizontal) |
-| `wrap` | Wrap from last item to first (and vice versa) |
-| `nowrap` | Disable wrapping (overrides behavior defaults) |
-| `nomemory` | Don't remember last-focused item on re-entry |
+| Modifier   | Effect                                                |
+| ---------- | ----------------------------------------------------- |
+| `inline`   | Restrict to inline-axis arrows (Left/Right in LTR)    |
+| `block`    | Restrict to block-axis arrows (Up/Down in horizontal) |
+| `wrap`     | Wrap from last item to first (and vice versa)         |
+| `nowrap`   | Disable wrapping (overrides behavior defaults)        |
+| `nomemory` | Don't remember last-focused item on re-entry          |
 
 ### Grid modifiers
 
 ```html
-<div focusgroup="grid row-flow col-wrap">
+<div focusgroup="grid row-flow col-wrap"></div>
 ```
 
-| Modifier | Effect |
-|---|---|
-| `wrap` | Wrap both rows and columns |
-| `flow` | Flow both axes (end of row → start of next row) |
-| `row-wrap` / `col-wrap` | Per-axis wrapping |
-| `row-flow` / `col-flow` | Per-axis flow |
-| `row-none` / `col-none` | Per-axis hard stops |
+| Modifier                | Effect                                          |
+| ----------------------- | ----------------------------------------------- |
+| `wrap`                  | Wrap both rows and columns                      |
+| `flow`                  | Flow both axes (end of row → start of next row) |
+| `row-wrap` / `col-wrap` | Per-axis wrapping                               |
+| `row-flow` / `col-flow` | Per-axis flow                                   |
+| `row-none` / `col-none` | Per-axis hard stops                             |
 
 ## Examples
 
@@ -125,7 +125,11 @@ Arrow keys navigate between buttons. Wrap sends focus from last → first.
 ### Grid (CSS Grid)
 
 ```html
-<div focusgroup="grid wrap" role="grid" style="display: grid; grid-template-columns: repeat(4, 1fr);">
+<div
+  focusgroup="grid wrap"
+  role="grid"
+  style="display: grid; grid-template-columns: repeat(4, 1fr);"
+>
   <button>A1</button>
   <button>A2</button>
   <button>A3</button>

@@ -1,4 +1,4 @@
-import { BEHAVIOR_DESCRIPTORS, type FocusgroupConfig } from './types.js';
+import { BEHAVIOR_DESCRIPTORS, type FocusgroupConfig } from "./types.js";
 
 /**
  * Apply ARIA roles based on the behavior token.
@@ -19,15 +19,15 @@ export function applyRoles(
   if (!descriptor) return;
 
   // Container role
-  if (!container.hasAttribute('role')) {
-    container.setAttribute('role', descriptor.containerRole);
+  if (!container.hasAttribute("role")) {
+    container.setAttribute("role", descriptor.containerRole);
   }
 
   // Child role inference (only for <button> elements without explicit role)
   if (descriptor.childRole) {
     for (const item of items) {
-      if (item.tagName === 'BUTTON' && !item.hasAttribute('role')) {
-        item.setAttribute('role', descriptor.childRole);
+      if (item.tagName === "BUTTON" && !item.hasAttribute("role")) {
+        item.setAttribute("role", descriptor.childRole);
       }
     }
   }
@@ -45,17 +45,14 @@ export function removeInferredRoles(
   const descriptor = BEHAVIOR_DESCRIPTORS[config.behavior];
   if (!descriptor) return;
 
-  if (container.getAttribute('role') === descriptor.containerRole) {
-    container.removeAttribute('role');
+  if (container.getAttribute("role") === descriptor.containerRole) {
+    container.removeAttribute("role");
   }
 
   if (descriptor.childRole) {
     for (const item of items) {
-      if (
-        item.tagName === 'BUTTON' &&
-        item.getAttribute('role') === descriptor.childRole
-      ) {
-        item.removeAttribute('role');
+      if (item.tagName === "BUTTON" && item.getAttribute("role") === descriptor.childRole) {
+        item.removeAttribute("role");
       }
     }
   }

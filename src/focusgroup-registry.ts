@@ -1,6 +1,6 @@
-import type { FocusgroupConfig } from './types.js';
-import { FocusgroupInstance } from './focusgroup-instance.js';
-import { composedParent } from './utils.js';
+import type { FocusgroupConfig } from "./types.js";
+import { FocusgroupInstance } from "./focusgroup-instance.js";
+import { composedParent } from "./utils.js";
 
 /**
  * Registry mapping focusgroup container elements to their instances.
@@ -51,7 +51,7 @@ export class FocusgroupRegistry {
         }
         // If we hit a container that doesn't own this element,
         // and this element has focusgroup="none", stop.
-        if (current.getAttribute('focusgroup') === 'none') {
+        if (current.getAttribute("focusgroup") === "none") {
           return null;
         }
       }

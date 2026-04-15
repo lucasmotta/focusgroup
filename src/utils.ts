@@ -3,40 +3,40 @@ export function isFocusable(el: Element): el is HTMLElement {
   if (isDisabled(el)) return false;
   if (!isVisible(el)) return false;
   if (isInert(el)) return false;
-  if (el.hasAttribute('tabindex')) return true;
+  if (el.hasAttribute("tabindex")) return true;
   if (isNativelyFocusable(el)) return true;
   return false;
 }
 
 function isDisabled(el: HTMLElement): boolean {
-  if ('disabled' in el && (el as HTMLButtonElement).disabled) return true;
+  if ("disabled" in el && (el as HTMLButtonElement).disabled) return true;
   return false;
 }
 
 function isNativelyFocusable(el: HTMLElement): boolean {
   const tag = el.tagName;
-  if (tag === 'BUTTON' || tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') {
+  if (tag === "BUTTON" || tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") {
     return true;
   }
-  if (tag === 'A' && el.hasAttribute('href')) return true;
-  const ce = el.getAttribute('contenteditable');
-  if (ce === 'true' || ce === '') return true;
-  if (tag === 'SUMMARY' && el.parentElement?.tagName === 'DETAILS') return true;
+  if (tag === "A" && el.hasAttribute("href")) return true;
+  const ce = el.getAttribute("contenteditable");
+  if (ce === "true" || ce === "") return true;
+  if (tag === "SUMMARY" && el.parentElement?.tagName === "DETAILS") return true;
   return false;
 }
 
 export function isVisible(el: HTMLElement): boolean {
-  if (el.hasAttribute('hidden')) return false;
+  if (el.hasAttribute("hidden")) return false;
   const style = getComputedStyle(el);
-  if (style.display === 'none') return false;
-  if (style.visibility === 'hidden') return false;
+  if (style.display === "none") return false;
+  if (style.visibility === "hidden") return false;
   // Check ancestors for display:none/hidden
   let parent = el.parentElement;
   while (parent) {
-    if (parent.hasAttribute('hidden')) return false;
+    if (parent.hasAttribute("hidden")) return false;
     const parentStyle = getComputedStyle(parent);
-    if (parentStyle.display === 'none') return false;
-    if (parentStyle.visibility === 'hidden') return false;
+    if (parentStyle.display === "none") return false;
+    if (parentStyle.visibility === "hidden") return false;
     parent = parent.parentElement;
   }
   return true;
@@ -45,7 +45,7 @@ export function isVisible(el: HTMLElement): boolean {
 function isInert(el: HTMLElement): boolean {
   let current: HTMLElement | null = el;
   while (current) {
-    if (current.hasAttribute('inert')) return true;
+    if (current.hasAttribute("inert")) return true;
     current = current.parentElement;
   }
   return false;
@@ -56,9 +56,7 @@ function isInert(el: HTMLElement): boolean {
  * If node has a shadow root, yields shadow root children.
  * If node is a <slot>, yields assigned nodes (or fallback content).
  */
-export function* flatTreeChildren(
-  node: Element | ShadowRoot | Document,
-): Generator<Element> {
+export function* flatTreeChildren(node: Element | ShadowRoot | Document): Generator<Element> {
   if (node instanceof HTMLSlotElement) {
     const assigned = node.assignedElements({ flatten: true });
     if (assigned.length > 0) {

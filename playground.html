@@ -629,11 +629,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
               <path
                 d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
               />
@@ -641,12 +637,10 @@
           </a>
         </div>
         <p>
-          Declarative arrow-key navigation for composite widgets. Navigate
-          within each example using arrow keys.
+          Declarative arrow-key navigation for composite widgets. Navigate within each example using
+          arrow keys.
         </p>
-        <div class="keys">
-          <kbd>Arrow Keys</kbd> <kbd>Home</kbd> <kbd>End</kbd> <kbd>Tab</kbd>
-        </div>
+        <div class="keys"><kbd>Arrow Keys</kbd> <kbd>Home</kbd> <kbd>End</kbd> <kbd>Tab</kbd></div>
       </header>
 
       <!-- Toolbar -->
@@ -656,11 +650,7 @@
           <code>focusgroup="toolbar wrap"</code>
         </div>
         <div class="example-body">
-          <div
-            focusgroup="toolbar wrap"
-            aria-label="Text Formatting"
-            class="h-group"
-          >
+          <div focusgroup="toolbar wrap" aria-label="Text Formatting" class="h-group">
             <button class="fg-item">Bold</button>
             <button class="fg-item">Italic</button>
             <button class="fg-item">Underline</button>
@@ -676,18 +666,8 @@
           <code>focusgroup="tablist nomemory"</code>
         </div>
         <div class="example-body">
-          <div
-            id="tablist"
-            focusgroup="tablist nomemory"
-            aria-label="Tabs"
-            class="tab-group"
-          >
-            <button
-              id="t1"
-              class="tab-item"
-              aria-selected="true"
-              aria-controls="p1"
-            >
+          <div id="tablist" focusgroup="tablist nomemory" aria-label="Tabs" class="tab-group">
+            <button id="t1" class="tab-item" aria-selected="true" aria-controls="p1">
               Overview
             </button>
             <button
@@ -699,46 +679,20 @@
             >
               Details
             </button>
-            <button
-              id="t3"
-              class="tab-item"
-              aria-selected="false"
-              aria-controls="p3"
-            >
+            <button id="t3" class="tab-item" aria-selected="false" aria-controls="p3">
               Reviews
             </button>
           </div>
-          <div
-            id="p1"
-            class="tab-panel"
-            role="tabpanel"
-            tabindex="0"
-            aria-labelledby="t1"
-          >
-            Overview of the focusgroup polyfill. Tab into the tabs, then use
-            arrow keys.
+          <div id="p1" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="t1">
+            Overview of the focusgroup polyfill. Tab into the tabs, then use arrow keys.
           </div>
-          <div
-            id="p2"
-            class="tab-panel"
-            role="tabpanel"
-            tabindex="0"
-            aria-labelledby="t2"
-            hidden
-          >
-            The <code>focusgroupstart</code> attribute on "Details" ensures it
-            receives focus on re-entry.
+          <div id="p2" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="t2" hidden>
+            The <code>focusgroupstart</code> attribute on "Details" ensures it receives focus on
+            re-entry.
           </div>
-          <div
-            id="p3"
-            class="tab-panel"
-            role="tabpanel"
-            tabindex="0"
-            aria-labelledby="t3"
-            hidden
-          >
-            The <code>nomemory</code> modifier resets focus to
-            <code>focusgroupstart</code> each time.
+          <div id="p3" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="t3" hidden>
+            The <code>nomemory</code> modifier resets focus to <code>focusgroupstart</code> each
+            time.
           </div>
         </div>
         <script>
@@ -749,12 +703,8 @@
               .querySelectorAll("#tablist .tab-item")
               .forEach((t) => t.setAttribute("aria-selected", "false"));
             tab.setAttribute("aria-selected", "true");
-            document
-              .querySelectorAll(".tab-panel")
-              .forEach((p) => (p.hidden = true));
-            const panel = document.getElementById(
-              tab.getAttribute("aria-controls"),
-            );
+            document.querySelectorAll(".tab-panel").forEach((p) => (p.hidden = true));
+            const panel = document.getElementById(tab.getAttribute("aria-controls"));
             if (panel) panel.hidden = false;
           });
         </script>
@@ -788,16 +738,10 @@
           <div class="example-body">
             <div focusgroup="listbox" aria-label="Colors" class="v-group">
               <div class="fg-item" tabindex="0" aria-selected="true">Red</div>
-              <div class="fg-item" tabindex="0" aria-selected="false">
-                Green
-              </div>
+              <div class="fg-item" tabindex="0" aria-selected="false">Green</div>
               <div class="fg-item" tabindex="0" aria-selected="false">Blue</div>
-              <div class="fg-item" tabindex="0" aria-selected="false">
-                Yellow
-              </div>
-              <div class="fg-item" tabindex="0" aria-selected="false">
-                Purple
-              </div>
+              <div class="fg-item" tabindex="0" aria-selected="false">Yellow</div>
+              <div class="fg-item" tabindex="0" aria-selected="false">Purple</div>
             </div>
           </div>
           <p class="example-note">Up/Down arrows, no wrap</p>
@@ -833,11 +777,7 @@
             <button class="fg-item">File</button>
             <button class="fg-item">Edit</button>
             <div class="nested-divider"></div>
-            <div
-              focusgroup="toolbar"
-              aria-label="Quick Actions"
-              class="h-group"
-            >
+            <div focusgroup="toolbar" aria-label="Quick Actions" class="h-group">
               <button class="fg-item">Save</button>
               <button class="fg-item">Undo</button>
               <button class="fg-item">Redo</button>
@@ -847,8 +787,7 @@
           </div>
         </div>
         <p class="example-note">
-          Two independent focusgroups — inner toolbar arrows don't affect
-          menubar
+          Two independent focusgroups — inner toolbar arrows don't affect menubar
         </p>
       </div>
 
@@ -862,52 +801,19 @@
             <code>focusgroup="grid wrap"</code>
           </div>
           <div class="example-body">
-            <div
-              focusgroup="grid wrap"
-              role="grid"
-              aria-label="Color Palette"
-              class="color-grid"
-            >
-              <button class="color-swatch" style="background: #ef4444">
-                Red
-              </button>
-              <button class="color-swatch" style="background: #f97316">
-                Orange
-              </button>
-              <button class="color-swatch" style="background: #eab308">
-                Yellow
-              </button>
-              <button class="color-swatch" style="background: #22c55e">
-                Green
-              </button>
-              <button
-                class="color-swatch"
-                focusgroupstart
-                style="background: #3b82f6"
-              >
-                Blue
-              </button>
-              <button class="color-swatch" style="background: #8b5cf6">
-                Purple
-              </button>
-              <button class="color-swatch" style="background: #ec4899">
-                Pink
-              </button>
-              <button class="color-swatch" style="background: #6b7280">
-                Gray
-              </button>
-              <button class="color-swatch" style="background: #171717">
-                Black
-              </button>
-              <button class="color-swatch is-light" style="background: #fafafa">
-                White
-              </button>
-              <button class="color-swatch" style="background: #92400e">
-                Brown
-              </button>
-              <button class="color-swatch" style="background: #0891b2">
-                Teal
-              </button>
+            <div focusgroup="grid wrap" role="grid" aria-label="Color Palette" class="color-grid">
+              <button class="color-swatch" style="background: #ef4444">Red</button>
+              <button class="color-swatch" style="background: #f97316">Orange</button>
+              <button class="color-swatch" style="background: #eab308">Yellow</button>
+              <button class="color-swatch" style="background: #22c55e">Green</button>
+              <button class="color-swatch" focusgroupstart style="background: #3b82f6">Blue</button>
+              <button class="color-swatch" style="background: #8b5cf6">Purple</button>
+              <button class="color-swatch" style="background: #ec4899">Pink</button>
+              <button class="color-swatch" style="background: #6b7280">Gray</button>
+              <button class="color-swatch" style="background: #171717">Black</button>
+              <button class="color-swatch is-light" style="background: #fafafa">White</button>
+              <button class="color-swatch" style="background: #92400e">Brown</button>
+              <button class="color-swatch" style="background: #0891b2">Teal</button>
             </div>
           </div>
           <p class="example-note">2D arrows, wraps within rows and columns</p>
@@ -950,23 +856,13 @@
           <code>focusgroup="toolbar wrap"</code>
         </div>
         <div class="example-body">
-          <div
-            focusgroup="toolbar wrap"
-            aria-label="Mixed Toolbar"
-            class="h-group"
-          >
+          <div focusgroup="toolbar wrap" aria-label="Mixed Toolbar" class="h-group">
             <button class="fg-item">Bold</button>
-            <input
-              class="mixed-input"
-              type="text"
-              placeholder="Arrow keys type here..."
-            />
+            <input class="mixed-input" type="text" placeholder="Arrow keys type here..." />
             <button class="fg-item">Apply</button>
           </div>
         </div>
-        <p class="example-note">
-          Arrow keys pass through to input — use Tab to escape
-        </p>
+        <p class="example-note">Arrow keys pass through to input — use Tab to escape</p>
       </div>
 
       <!-- RTL -->
@@ -976,11 +872,7 @@
           <code>dir="rtl" focusgroup="toolbar wrap"</code>
         </div>
         <div class="example-body">
-          <div
-            focusgroup="toolbar wrap"
-            aria-label="RTL Toolbar"
-            class="h-group"
-          >
+          <div focusgroup="toolbar wrap" aria-label="RTL Toolbar" class="h-group">
             <button class="fg-item">الأول</button>
             <button class="fg-item">الثاني</button>
             <button class="fg-item">الثالث</button>
@@ -1003,9 +895,7 @@
         const el = e.target;
         const tag = el.tagName.toLowerCase();
         const id = el.id ? `#${el.id}` : "";
-        const role = el.getAttribute("role")
-          ? `[${el.getAttribute("role")}]`
-          : "";
+        const role = el.getAttribute("role") ? `[${el.getAttribute("role")}]` : "";
         const text = el.textContent?.trim().slice(0, 30) || "";
         logValue.textContent = `${tag}${id}${role}  "${text}"`;
       });

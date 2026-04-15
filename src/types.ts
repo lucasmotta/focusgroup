@@ -1,17 +1,17 @@
 export type FocusgroupBehavior =
-  | 'toolbar'
-  | 'tablist'
-  | 'radiogroup'
-  | 'listbox'
-  | 'menu'
-  | 'menubar'
-  | 'tree'
-  | 'grid'
-  | 'none';
+  | "toolbar"
+  | "tablist"
+  | "radiogroup"
+  | "listbox"
+  | "menu"
+  | "menubar"
+  | "tree"
+  | "grid"
+  | "none";
 
-export type FocusgroupDirection = 'inline' | 'block' | 'both';
-export type WrapMode = 'wrap' | 'nowrap';
-export type GridWrapMode = 'none' | 'wrap' | 'flow';
+export type FocusgroupDirection = "inline" | "block" | "both";
+export type WrapMode = "wrap" | "nowrap";
+export type GridWrapMode = "none" | "wrap" | "flow";
 
 export interface FocusgroupConfig {
   behavior: FocusgroupBehavior;
@@ -53,45 +53,45 @@ export interface FocusgroupSegment {
 
 export const BEHAVIOR_DESCRIPTORS: Record<string, BehaviorDescriptor> = {
   toolbar: {
-    containerRole: 'toolbar',
+    containerRole: "toolbar",
     childRole: null,
-    defaultDirection: 'inline',
-    defaultWrap: 'nowrap',
+    defaultDirection: "inline",
+    defaultWrap: "nowrap",
   },
   tablist: {
-    containerRole: 'tablist',
-    childRole: 'tab',
-    defaultDirection: 'inline',
-    defaultWrap: 'wrap',
+    containerRole: "tablist",
+    childRole: "tab",
+    defaultDirection: "inline",
+    defaultWrap: "wrap",
   },
   radiogroup: {
-    containerRole: 'radiogroup',
-    childRole: 'radio',
-    defaultDirection: 'both',
-    defaultWrap: 'wrap',
+    containerRole: "radiogroup",
+    childRole: "radio",
+    defaultDirection: "both",
+    defaultWrap: "wrap",
   },
   listbox: {
-    containerRole: 'listbox',
-    childRole: 'option',
-    defaultDirection: 'block',
-    defaultWrap: 'nowrap',
+    containerRole: "listbox",
+    childRole: "option",
+    defaultDirection: "block",
+    defaultWrap: "nowrap",
   },
   menu: {
-    containerRole: 'menu',
-    childRole: 'menuitem',
-    defaultDirection: 'block',
-    defaultWrap: 'wrap',
+    containerRole: "menu",
+    childRole: "menuitem",
+    defaultDirection: "block",
+    defaultWrap: "wrap",
   },
   menubar: {
-    containerRole: 'menubar',
-    childRole: 'menuitem',
-    defaultDirection: 'inline',
-    defaultWrap: 'wrap',
+    containerRole: "menubar",
+    childRole: "menuitem",
+    defaultDirection: "inline",
+    defaultWrap: "wrap",
   },
   tree: {
-    containerRole: 'tree',
-    childRole: 'treeitem',
-    defaultDirection: 'block',
-    defaultWrap: 'nowrap',
+    containerRole: "tree",
+    childRole: "treeitem",
+    defaultDirection: "block",
+    defaultWrap: "nowrap",
   },
 };

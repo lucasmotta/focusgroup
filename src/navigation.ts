@@ -1,8 +1,8 @@
-import type { FocusgroupInstance } from './focusgroup-instance.js';
-import type { GridLayout } from './types.js';
-import { resolveDirectionMap } from './writing-mode.js';
-import { isKeyConflictElement } from './key-conflict.js';
-import { setProgrammaticFocus } from './focus-state.js';
+import type { FocusgroupInstance } from "./focusgroup-instance.js";
+import type { GridLayout } from "./types.js";
+import { resolveDirectionMap } from "./writing-mode.js";
+import { isKeyConflictElement } from "./key-conflict.js";
+import { setProgrammaticFocus } from "./focus-state.js";
 
 /**
  * Handle a keydown event for focusgroup navigation.
@@ -15,7 +15,7 @@ export function handleNavigation(
 ): boolean {
   // Key conflict check: arrow keys pass through, Tab provides escape
   if (isKeyConflictElement(target, instance.container, instance.config)) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       return handleTabEscape(event, target, instance);
     }
     return false;
@@ -40,15 +40,15 @@ export function handleNavigation(
     return true;
   }
 
-  if (event.key === 'Home') {
+  if (event.key === "Home") {
     event.preventDefault();
-    moveFocusToEdge(target, instance, 'first');
+    moveFocusToEdge(target, instance, "first");
     return true;
   }
 
-  if (event.key === 'End') {
+  if (event.key === "End") {
     event.preventDefault();
-    moveFocusToEdge(target, instance, 'last');
+    moveFocusToEdge(target, instance, "last");
     return true;
   }
 
@@ -66,8 +66,8 @@ function handleGridNavigation(
 
   // Resolve which physical keys map to inline/block directions
   const style = getComputedStyle(instance.container);
-  const writingMode = style.writingMode || 'horizontal-tb';
-  const direction = style.direction || 'ltr';
+  const writingMode = style.writingMode || "horizontal-tb";
+  const direction = style.direction || "ltr";
   const mapping = getGridKeyMapping(writingMode, direction);
 
   const { row, col } = pos;
@@ -86,10 +86,10 @@ function handleGridNavigation(
     case mapping.blockBackward:
       nextCell = moveBlock(grid, row, col, -1, instance);
       break;
-    case 'Home':
+    case "Home":
       nextCell = grid.getCell(row, 0);
       break;
-    case 'End': {
+    case "End": {
       const rowCells = grid.rows[row];
       nextCell = rowCells ? rowCells[rowCells.length - 1] : null;
       break;
@@ -109,8 +109,8 @@ function handleGridNavigation(
     event.key === mapping.inlineBackward ||
     event.key === mapping.blockForward ||
     event.key === mapping.blockBackward ||
-    event.key === 'Home' ||
-    event.key === 'End'
+    event.key === "Home" ||
+    event.key === "End"
   ) {
     // At boundary — prevent default but don't move
     event.preventDefault();
@@ -137,12 +137,12 @@ function moveInline(
     return rowCells[nextCol];
   }
 
-  if (rowWrap === 'wrap') {
+  if (rowWrap === "wrap") {
     nextCol = ((nextCol % rowCells.length) + rowCells.length) % rowCells.length;
     return rowCells[nextCol];
   }
 
-  if (rowWrap === 'flow') {
+  if (rowWrap === "flow") {
     // Flow to next/previous row
     let nextRow = row + delta;
     if (nextRow < 0) nextRow = grid.rows.length - 1;
@@ -176,14 +176,14 @@ function moveBlock(
     return targetRow[clampedCol] ?? null;
   }
 
-  if (colWrap === 'wrap') {
+  if (colWrap === "wrap") {
     nextRow = ((nextRow % grid.rows.length) + grid.rows.length) % grid.rows.length;
     const targetRow = grid.rows[nextRow];
     const clampedCol = Math.min(col, targetRow.length - 1);
     return targetRow[clampedCol] ?? null;
   }
 
-  if (colWrap === 'flow') {
+  if (colWrap === "flow") {
     // Flow to next/previous column
     let nextCol = col + delta;
     if (nextCol < 0) {
@@ -210,42 +210,39 @@ interface GridKeyMapping {
   blockBackward: string;
 }
 
-function getGridKeyMapping(
-  writingMode: string,
-  direction: string,
-): GridKeyMapping {
+function getGridKeyMapping(writingMode: string, direction: string): GridKeyMapping {
   switch (writingMode) {
-    case 'vertical-rl':
-    case 'sideways-rl':
+    case "vertical-rl":
+    case "sideways-rl":
       return {
-        inlineForward: 'ArrowDown',
-        inlineBackward: 'ArrowUp',
-        blockForward: 'ArrowLeft',
-        blockBackward: 'ArrowRight',
+        inlineForward: "ArrowDown",
+        inlineBackward: "ArrowUp",
+        blockForward: "ArrowLeft",
+        blockBackward: "ArrowRight",
       };
-    case 'vertical-lr':
-    case 'sideways-lr':
+    case "vertical-lr":
+    case "sideways-lr":
       return {
-        inlineForward: 'ArrowDown',
-        inlineBackward: 'ArrowUp',
-        blockForward: 'ArrowRight',
-        blockBackward: 'ArrowLeft',
+        inlineForward: "ArrowDown",
+        inlineBackward: "ArrowUp",
+        blockForward: "ArrowRight",
+        blockBackward: "ArrowLeft",
       };
-    case 'horizontal-tb':
+    case "horizontal-tb":
     default:
-      if (direction === 'rtl') {
+      if (direction === "rtl") {
         return {
-          inlineForward: 'ArrowLeft',
-          inlineBackward: 'ArrowRight',
-          blockForward: 'ArrowDown',
-          blockBackward: 'ArrowUp',
+          inlineForward: "ArrowLeft",
+          inlineBackward: "ArrowRight",
+          blockForward: "ArrowDown",
+          blockBackward: "ArrowUp",
         };
       }
       return {
-        inlineForward: 'ArrowRight',
-        inlineBackward: 'ArrowLeft',
-        blockForward: 'ArrowDown',
-        blockBackward: 'ArrowUp',
+        inlineForward: "ArrowRight",
+        inlineBackward: "ArrowLeft",
+        blockForward: "ArrowDown",
+        blockBackward: "ArrowUp",
       };
   }
 }
@@ -254,14 +251,10 @@ function focusProgrammatically(el: HTMLElement): void {
   setProgrammaticFocus(true);
   el.focus();
   setProgrammaticFocus(false);
-  el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  el.scrollIntoView({ block: "nearest", inline: "nearest" });
 }
 
-function moveFocus(
-  current: HTMLElement,
-  instance: FocusgroupInstance,
-  delta: 1 | -1,
-): void {
+function moveFocus(current: HTMLElement, instance: FocusgroupInstance, delta: 1 | -1): void {
   const segment = instance.getSegmentContaining(current);
   if (!segment) return;
 
@@ -270,7 +263,7 @@ function moveFocus(
 
   let nextIdx = currentIdx + delta;
 
-  if (instance.config.wrap === 'wrap') {
+  if (instance.config.wrap === "wrap") {
     nextIdx = ((nextIdx % segment.items.length) + segment.items.length) % segment.items.length;
   } else {
     if (nextIdx < 0 || nextIdx >= segment.items.length) return;
@@ -282,13 +275,12 @@ function moveFocus(
 function moveFocusToEdge(
   current: HTMLElement,
   instance: FocusgroupInstance,
-  edge: 'first' | 'last',
+  edge: "first" | "last",
 ): void {
   const segment = instance.getSegmentContaining(current);
   if (!segment || segment.items.length === 0) return;
 
-  const target =
-    edge === 'first' ? segment.items[0] : segment.items[segment.items.length - 1];
+  const target = edge === "first" ? segment.items[0] : segment.items[segment.items.length - 1];
   focusProgrammatically(target);
 }
 

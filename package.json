@@ -2,6 +2,10 @@
   "name": "focusgroup-polyfill",
   "version": "0.1.0",
   "description": "Polyfill for the HTML focusgroup attribute (Open UI proposal)",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -14,15 +18,16 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "make build",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "ci": "make ci",
     "site": "make site",
     "dev:site": "make dev-site",
     "deploy": "make deploy",
@@ -31,11 +36,12 @@
   "devDependencies": {
     "@playwright/test": "^1.50.0",
     "jsdom": "^25.0.0",
+    "oxfmt": "^0.45.0",
+    "oxlint": "^1.60.0",
     "serve": "^14.2.6",
     "tsup": "^8.4.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0",
     "wrangler": "^4.0.0"
-  },
-  "license": "MIT"
+  }
 }

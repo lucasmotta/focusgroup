@@ -1,8 +1,8 @@
-import { FocusgroupRegistry } from './focusgroup-registry.js';
-import { parseAttribute } from './parse-attribute.js';
-import { handleNavigation } from './navigation.js';
-import { onItemFocused } from './tab-management.js';
-import { isProgrammaticFocus } from './focus-state.js';
+import { FocusgroupRegistry } from "./focusgroup-registry.js";
+import { parseAttribute } from "./parse-attribute.js";
+import { handleNavigation } from "./navigation.js";
+import { onItemFocused } from "./tab-management.js";
+import { isProgrammaticFocus } from "./focus-state.js";
 
 let registry: FocusgroupRegistry | null = null;
 let observer: MutationObserver | null = null;
@@ -17,10 +17,10 @@ export function init(): void {
   scanDocument();
 
   // Global keydown listener (capture phase to intercept before other handlers)
-  document.addEventListener('keydown', handleKeydown, { capture: true });
+  document.addEventListener("keydown", handleKeydown, { capture: true });
 
   // Global focusin listener for roving tabindex updates
-  document.addEventListener('focusin', handleFocusin);
+  document.addEventListener("focusin", handleFocusin);
 
   // MutationObserver for dynamic DOM changes
   observer = new MutationObserver(handleMutations);
@@ -28,20 +28,15 @@ export function init(): void {
     subtree: true,
     childList: true,
     attributes: true,
-    attributeFilter: [
-      'focusgroup',
-      'focusgroupstart',
-      'disabled',
-      'hidden',
-    ],
+    attributeFilter: ["focusgroup", "focusgroupstart", "disabled", "hidden"],
   });
 }
 
 export function destroy(): void {
   if (!registry) return;
 
-  document.removeEventListener('keydown', handleKeydown, { capture: true });
-  document.removeEventListener('focusin', handleFocusin);
+  document.removeEventListener("keydown", handleKeydown, { capture: true });
+  document.removeEventListener("focusin", handleFocusin);
 
   observer?.disconnect();
   observer = null;
@@ -54,10 +49,10 @@ export function destroy(): void {
 function scanDocument(): void {
   if (!registry) return;
 
-  const containers = document.querySelectorAll<HTMLElement>('[focusgroup]');
+  const containers = document.querySelectorAll<HTMLElement>("[focusgroup]");
   for (const container of containers) {
-    const raw = container.getAttribute('focusgroup');
-    if (!raw || raw === 'none') continue;
+    const raw = container.getAttribute("focusgroup");
+    if (!raw || raw === "none") continue;
 
     const config = parseAttribute(raw);
     if (config) {
@@ -94,7 +89,7 @@ function handleFocusin(event: FocusEvent): void {
     if (segment) {
       let startIdx = 0;
       for (let i = 0; i < segment.items.length; i++) {
-        if (segment.items[i].hasAttribute('focusgroupstart')) {
+        if (segment.items[i].hasAttribute("focusgroupstart")) {
           startIdx = i;
           break;
         }
@@ -116,14 +111,14 @@ function handleMutations(mutations: MutationRecord[]): void {
   let needsRescan = false;
 
   for (const mutation of mutations) {
-    if (mutation.type === 'attributes') {
-      if (mutation.attributeName === 'focusgroup') {
+    if (mutation.type === "attributes") {
+      if (mutation.attributeName === "focusgroup") {
         handleFocusgroupAttributeChange(mutation.target as HTMLElement);
       } else {
         // disabled, hidden, focusgroupstart changes trigger rescan
         needsRescan = true;
       }
-    } else if (mutation.type === 'childList') {
+    } else if (mutation.type === "childList") {
       needsRescan = true;
     }
   }
@@ -140,9 +135,9 @@ function handleMutations(mutations: MutationRecord[]): void {
 function handleFocusgroupAttributeChange(target: HTMLElement): void {
   if (!registry) return;
 
-  const raw = target.getAttribute('focusgroup');
+  const raw = target.getAttribute("focusgroup");
 
-  if (!raw || raw === 'none') {
+  if (!raw || raw === "none") {
     // Attribute removed or set to "none" — unregister
     registry.unregister(target);
     // Refresh other instances in case this element was nested

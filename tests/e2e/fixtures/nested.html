@@ -1,35 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Nested Focusgroups</title>
-  <script src="/dist/index.global.js"></script>
-</head>
-<body>
-  <button id="before">Before</button>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nested Focusgroups</title>
+    <script src="/dist/index.global.js"></script>
+  </head>
+  <body>
+    <button id="before">Before</button>
 
-  <div id="outer" focusgroup="toolbar" aria-label="Main Toolbar">
-    <button id="outer-a">Save</button>
-    <button id="outer-b">Print</button>
+    <div id="outer" focusgroup="toolbar" aria-label="Main Toolbar">
+      <button id="outer-a">Save</button>
+      <button id="outer-b">Print</button>
 
-    <div id="inner" focusgroup="toolbar" aria-label="Text Formatting">
-      <button id="inner-a">Bold</button>
-      <button id="inner-b">Italic</button>
-      <button id="inner-c">Underline</button>
+      <div id="inner" focusgroup="toolbar" aria-label="Text Formatting">
+        <button id="inner-a">Bold</button>
+        <button id="inner-b">Italic</button>
+        <button id="inner-c">Underline</button>
+      </div>
+
+      <button id="outer-c">Close</button>
     </div>
 
-    <button id="outer-c">Close</button>
-  </div>
+    <button id="after">After</button>
 
-  <button id="after">After</button>
-
-  <!-- Opt-out example -->
-  <div id="optout-toolbar" focusgroup="toolbar" aria-label="Opt-out Toolbar">
-    <button id="opt-a">A</button>
-    <div focusgroup="none">
-      <button id="opt-excluded">Excluded</button>
+    <!-- Opt-out example -->
+    <div id="optout-toolbar" focusgroup="toolbar" aria-label="Opt-out Toolbar">
+      <button id="opt-a">A</button>
+      <div focusgroup="none">
+        <button id="opt-excluded">Excluded</button>
+      </div>
+      <button id="opt-b">B</button>
     </div>
-    <button id="opt-b">B</button>
-  </div>
-</body>
+  </body>
 </html>

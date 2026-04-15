@@ -1,4 +1,4 @@
-import { isFocusable, walkFlatTree } from './utils.js';
+import { isFocusable } from "./utils.js";
 
 /**
  * Discover all focusgroup items within the scope of a focusgroup container.
@@ -16,7 +16,7 @@ function collectItems(root: Element | ShadowRoot, items: HTMLElement[]): void {
   for (const child of iterateChildren(root)) {
     // If this child declares its own focusgroup, skip it and its subtree entirely.
     // This handles both nested focusgroups (focusgroup="toolbar") and opt-outs (focusgroup="none").
-    if (child instanceof HTMLElement && child.hasAttribute('focusgroup')) {
+    if (child instanceof HTMLElement && child.hasAttribute("focusgroup")) {
       continue;
     }
 
@@ -33,9 +33,7 @@ function collectItems(root: Element | ShadowRoot, items: HTMLElement[]): void {
   }
 }
 
-function* iterateChildren(
-  node: Element | ShadowRoot,
-): Generator<Element> {
+function* iterateChildren(node: Element | ShadowRoot): Generator<Element> {
   if (node instanceof HTMLSlotElement) {
     const assigned = node.assignedElements({ flatten: true });
     if (assigned.length > 0) {

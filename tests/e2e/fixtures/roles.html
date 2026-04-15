@@ -1,28 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Role Inference</title>
-  <script src="/dist/index.global.js"></script>
-</head>
-<body>
-  <!-- No explicit roles — polyfill should infer them -->
-  <div id="tablist-no-role" focusgroup="tablist" aria-label="Tabs">
-    <button id="tab-a">Tab A</button>
-    <button id="tab-b">Tab B</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Role Inference</title>
+    <script src="/dist/index.global.js"></script>
+  </head>
+  <body>
+    <!-- No explicit roles — polyfill should infer them -->
+    <div id="tablist-no-role" focusgroup="tablist" aria-label="Tabs">
+      <button id="tab-a">Tab A</button>
+      <button id="tab-b">Tab B</button>
+    </div>
 
-  <!-- Explicit roles should be preserved -->
-  <div id="tablist-explicit" role="navigation" focusgroup="tablist" aria-label="Nav Tabs">
-    <button id="tab-c" role="link">Tab C</button>
-    <button id="tab-d">Tab D</button>
-  </div>
+    <!-- Explicit roles should be preserved -->
+    <div id="tablist-explicit" role="navigation" focusgroup="tablist" aria-label="Nav Tabs">
+      <button id="tab-c" role="link">Tab C</button>
+      <button id="tab-d">Tab D</button>
+    </div>
 
-  <!-- Menu with child role inference -->
-  <div id="menu-roles" focusgroup="menu" aria-label="Menu">
-    <button id="menu-a">Item A</button>
-    <button id="menu-b">Item B</button>
-    <a id="menu-link" href="#">Link Item</a>
-  </div>
-</body>
+    <!-- Menu with child role inference -->
+    <div id="menu-roles" focusgroup="menu" aria-label="Menu">
+      <button id="menu-a">Item A</button>
+      <button id="menu-b">Item B</button>
+      <a id="menu-link" href="#">Link Item</a>
+    </div>
+  </body>
 </html>

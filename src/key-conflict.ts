@@ -1,11 +1,21 @@
-import type { FocusgroupConfig } from './types.js';
-import { resolveDirectionMap } from './writing-mode.js';
+import type { FocusgroupConfig } from "./types.js";
+import { resolveDirectionMap } from "./writing-mode.js";
 
 // Input types that use arrow keys natively
 const ARROW_KEY_INPUT_TYPES = new Set([
-  'text', 'search', 'url', 'tel', 'email', 'password',
-  'number', 'date', 'datetime-local', 'month', 'week', 'time',
-  'range',
+  "text",
+  "search",
+  "url",
+  "tel",
+  "email",
+  "password",
+  "number",
+  "date",
+  "datetime-local",
+  "month",
+  "week",
+  "time",
+  "range",
 ]);
 
 /**
@@ -26,10 +36,7 @@ export function isKeyConflictElement(
   if (el instanceof HTMLTextAreaElement) return true;
   if (el instanceof HTMLSelectElement) return true;
 
-  if (
-    el.getAttribute('contenteditable') === 'true' ||
-    el.getAttribute('contenteditable') === ''
-  ) {
+  if (el.getAttribute("contenteditable") === "true" || el.getAttribute("contenteditable") === "") {
     return true;
   }
 
@@ -49,21 +56,19 @@ function isConflictingScrollContainer(
   const overflowY = style.overflowY;
 
   const canScrollX =
-    (overflowX === 'auto' || overflowX === 'scroll') &&
-    el.scrollWidth > el.clientWidth;
+    (overflowX === "auto" || overflowX === "scroll") && el.scrollWidth > el.clientWidth;
   const canScrollY =
-    (overflowY === 'auto' || overflowY === 'scroll') &&
-    el.scrollHeight > el.clientHeight;
+    (overflowY === "auto" || overflowY === "scroll") && el.scrollHeight > el.clientHeight;
 
   if (!canScrollX && !canScrollY) return false;
 
   const dirMap = resolveDirectionMap(container, config);
   const allKeys = [...dirMap.forward, ...dirMap.backward];
 
-  if (canScrollX && (allKeys.includes('ArrowLeft') || allKeys.includes('ArrowRight'))) {
+  if (canScrollX && (allKeys.includes("ArrowLeft") || allKeys.includes("ArrowRight"))) {
     return true;
   }
-  if (canScrollY && (allKeys.includes('ArrowUp') || allKeys.includes('ArrowDown'))) {
+  if (canScrollY && (allKeys.includes("ArrowUp") || allKeys.includes("ArrowDown"))) {
     return true;
   }
 

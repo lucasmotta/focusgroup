@@ -1,5 +1,5 @@
-import type { GridLayout } from './types.js';
-import { isFocusable } from './utils.js';
+import type { GridLayout } from "./types.js";
+import { isFocusable } from "./utils.js";
 
 /**
  * Build a 2D grid layout from a CSS Grid container.
@@ -12,7 +12,7 @@ import { isFocusable } from './utils.js';
  */
 export function buildGridLayout(container: HTMLElement): GridLayout | null {
   const style = getComputedStyle(container);
-  if (style.display !== 'grid' && style.display !== 'inline-grid') {
+  if (style.display !== "grid" && style.display !== "inline-grid") {
     console.warn(
       `[focusgroup-polyfill] focusgroup="grid" is set on an element that is not display:grid.`,
       container,
@@ -29,7 +29,7 @@ export function buildGridLayout(container: HTMLElement): GridLayout | null {
   const items: HTMLElement[] = [];
   for (const child of container.children) {
     if (!(child instanceof HTMLElement)) continue;
-    if (child.hasAttribute('focusgroup')) continue;
+    if (child.hasAttribute("focusgroup")) continue;
     if (!isFocusable(child)) continue;
     items.push(child);
   }
@@ -92,7 +92,7 @@ export function buildGridLayout(container: HTMLElement): GridLayout | null {
  */
 function getColumnCount(style: CSSStyleDeclaration): number {
   const value = style.gridTemplateColumns;
-  if (!value || value === 'none') return 0;
+  if (!value || value === "none") return 0;
   // Split by whitespace — each token is a resolved track size
   return value.trim().split(/\s+/).length;
 }
@@ -102,7 +102,7 @@ function getColumnCount(style: CSSStyleDeclaration): number {
  * line number, or null if it's "auto" or a named line.
  */
 function parseGridLine(value: string): number | null {
-  if (!value || value === 'auto') return null;
+  if (!value || value === "auto") return null;
   const n = parseInt(value, 10);
   return isNaN(n) ? null : n;
 }

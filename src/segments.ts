@@ -1,5 +1,5 @@
-import type { FocusgroupSegment } from './types.js';
-import { isFocusable, walkFlatTree } from './utils.js';
+import type { FocusgroupSegment } from "./types.js";
+import { isFocusable, walkFlatTree } from "./utils.js";
 
 /**
  * Compute focusgroup segments from a container and its discovered items.
@@ -10,10 +10,7 @@ import { isFocusable, walkFlatTree } from './utils.js';
  * In the common case (no opted-out focusable elements between items),
  * there will be a single segment containing all items.
  */
-export function computeSegments(
-  container: HTMLElement,
-  items: HTMLElement[],
-): FocusgroupSegment[] {
+export function computeSegments(container: HTMLElement, items: HTMLElement[]): FocusgroupSegment[] {
   if (items.length === 0) return [];
 
   const itemSet = new Set(items);
@@ -27,8 +24,8 @@ export function computeSegments(
       currentItems.push(el);
     } else if (
       isFocusable(el) &&
-      el.hasAttribute('focusgroup') &&
-      el.getAttribute('focusgroup') === 'none'
+      el.hasAttribute("focusgroup") &&
+      el.getAttribute("focusgroup") === "none"
     ) {
       // An opted-out focusable element breaks the segment
       if (currentItems.length > 0) {
