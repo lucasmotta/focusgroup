@@ -38,7 +38,7 @@ site: build
 	mkdir -p public/dist public/assets
 	cp playground.html public/index.html
 	cp dist/index.global.js dist/index.global.js.map public/dist/
-	cp assets/logo-light.svg assets/logo-dark.svg public/assets/
+	cp -R assets/. public/assets/
 
 # Cloudflare Workers preview server (local dev)
 dev-site: site
