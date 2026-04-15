@@ -11,6 +11,8 @@ function makeConfig(
     wrap: 'nowrap',
     memory: true,
     raw: 'toolbar',
+    gridRowWrap: 'none',
+    gridColWrap: 'none',
     ...overrides,
   };
 }

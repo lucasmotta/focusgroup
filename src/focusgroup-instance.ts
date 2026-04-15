@@ -1,14 +1,16 @@
-import type { FocusgroupConfig, FocusgroupSegment } from './types.js';
+import type { FocusgroupConfig, FocusgroupSegment, GridLayout } from './types.js';
 import { discoverItems } from './item-discovery.js';
 import { computeSegments } from './segments.js';
 import { enforceRovingTabindex, restoreTabindex } from './tab-management.js';
 import { applyRoles, removeInferredRoles } from './role-inference.js';
+import { buildGridLayout } from './grid-layout.js';
 
 export class FocusgroupInstance {
   readonly container: HTMLElement;
   config: FocusgroupConfig;
   items: HTMLElement[] = [];
   segments: FocusgroupSegment[] = [];
+  gridLayout: GridLayout | null = null;
 
   private itemSet = new Set<HTMLElement>();
 
@@ -18,12 +20,25 @@ export class FocusgroupInstance {
     this.refresh();
   }
 
+  get isGrid(): boolean {
+    return this.config.behavior === 'grid' && this.gridLayout !== null;
+  }
+
   /**
    * Re-discover items, recompute segments, and update tabindex/roles.
    * Called on init and when the DOM changes.
    */
   refresh(): void {
-    this.items = discoverItems(this.container);
+    if (this.config.behavior === 'grid') {
+      this.gridLayout = buildGridLayout(this.container);
+      // For grid, items are all cells flattened (for tab management / roving tabindex)
+      this.items = this.gridLayout
+        ? this.gridLayout.rows.flat()
+        : [];
+    } else {
+      this.gridLayout = null;
+      this.items = discoverItems(this.container);
+    }
     this.itemSet = new Set(this.items);
 
     // Preserve memory across refreshes

@@ -16,19 +16,18 @@ describe('parseAttribute', () => {
 
   it('returns null for unknown behavior token', () => {
     expect(parseAttribute('unknown')).toBeNull();
-    expect(parseAttribute('grid')).toBeNull(); // grid not supported yet
+    expect(parseAttribute('foobar')).toBeNull();
   });
 
   // Toolbar
   it('parses "toolbar" with defaults (inline, nowrap)', () => {
     const config = parseAttribute('toolbar');
-    expect(config).toEqual({
-      behavior: 'toolbar',
-      direction: 'inline',
-      wrap: 'nowrap',
-      memory: true,
-      raw: 'toolbar',
-    });
+    expect(config?.behavior).toBe('toolbar');
+    expect(config?.direction).toBe('inline');
+    expect(config?.wrap).toBe('nowrap');
+    expect(config?.memory).toBe(true);
+    expect(config?.gridRowWrap).toBe('none');
+    expect(config?.gridColWrap).toBe('none');
   });
 
   it('parses "toolbar wrap"', () => {
@@ -39,13 +38,10 @@ describe('parseAttribute', () => {
   // Tablist
   it('parses "tablist" with defaults (inline, wrap)', () => {
     const config = parseAttribute('tablist');
-    expect(config).toEqual({
-      behavior: 'tablist',
-      direction: 'inline',
-      wrap: 'wrap',
-      memory: true,
-      raw: 'tablist',
-    });
+    expect(config?.behavior).toBe('tablist');
+    expect(config?.direction).toBe('inline');
+    expect(config?.wrap).toBe('wrap');
+    expect(config?.memory).toBe(true);
   });
 
   it('parses "tablist nowrap" overrides default wrap', () => {
@@ -128,5 +124,52 @@ describe('parseAttribute', () => {
     const config = parseAttribute('tablist inline wrap');
     expect(config?.direction).toBe('inline');
     expect(config?.wrap).toBe('wrap');
+  });
+
+  // Grid
+  it('parses "grid" with defaults (both, nowrap)', () => {
+    const config = parseAttribute('grid');
+    expect(config?.behavior).toBe('grid');
+    expect(config?.direction).toBe('both');
+    expect(config?.wrap).toBe('nowrap');
+    expect(config?.gridRowWrap).toBe('none');
+    expect(config?.gridColWrap).toBe('none');
+  });
+
+  it('parses "grid wrap" sets both axes to wrap', () => {
+    const config = parseAttribute('grid wrap');
+    expect(config?.gridRowWrap).toBe('wrap');
+    expect(config?.gridColWrap).toBe('wrap');
+  });
+
+  it('parses "grid flow" sets both axes to flow', () => {
+    const config = parseAttribute('grid flow');
+    expect(config?.gridRowWrap).toBe('flow');
+    expect(config?.gridColWrap).toBe('flow');
+  });
+
+  it('parses per-axis grid modifiers', () => {
+    const config = parseAttribute('grid row-wrap col-flow');
+    expect(config?.gridRowWrap).toBe('wrap');
+    expect(config?.gridColWrap).toBe('flow');
+  });
+
+  it('per-axis overrides "wrap" for grid', () => {
+    const config = parseAttribute('grid wrap col-none');
+    expect(config?.gridRowWrap).toBe('wrap');
+    expect(config?.gridColWrap).toBe('none');
+  });
+
+  it('parses "grid row-flow col-wrap nomemory"', () => {
+    const config = parseAttribute('grid row-flow col-wrap nomemory');
+    expect(config?.gridRowWrap).toBe('flow');
+    expect(config?.gridColWrap).toBe('wrap');
+    expect(config?.memory).toBe(false);
+  });
+
+  it('grid modifiers are ignored for non-grid behaviors', () => {
+    const config = parseAttribute('toolbar row-wrap col-flow');
+    expect(config?.gridRowWrap).toBe('none');
+    expect(config?.gridColWrap).toBe('none');
   });
 });

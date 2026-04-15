@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grid Focusgroup</title>
+  <script src="/dist/index.global.js"></script>
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      gap: 4px;
+    }
+    .grid-4col {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 4px;
+    }
+    button { padding: 8px; }
+  </style>
+</head>
+<body>
+  <button id="before">Before</button>
+
+  <!-- Basic 3x3 grid, no wrap -->
+  <div id="grid-basic" class="grid" focusgroup="grid" role="grid" aria-label="Basic Grid">
+    <button id="c00">R0C0</button>
+    <button id="c01">R0C1</button>
+    <button id="c02">R0C2</button>
+    <button id="c10">R1C0</button>
+    <button id="c11">R1C1</button>
+    <button id="c12">R1C2</button>
+    <button id="c20">R2C0</button>
+    <button id="c21">R2C1</button>
+    <button id="c22">R2C2</button>
+  </div>
+
+  <button id="middle">Middle</button>
+
+  <!-- 3x3 grid with wrap -->
+  <div id="grid-wrap" class="grid" focusgroup="grid wrap" role="grid" aria-label="Wrap Grid">
+    <button id="w00">R0C0</button>
+    <button id="w01">R0C1</button>
+    <button id="w02">R0C2</button>
+    <button id="w10">R1C0</button>
+    <button id="w11">R1C1</button>
+    <button id="w12">R1C2</button>
+    <button id="w20">R2C0</button>
+    <button id="w21">R2C1</button>
+    <button id="w22">R2C2</button>
+  </div>
+
+  <button id="middle2">Middle2</button>
+
+  <!-- 3x3 grid with row-flow -->
+  <div id="grid-flow" class="grid" focusgroup="grid row-flow" role="grid" aria-label="Flow Grid">
+    <button id="f00">R0C0</button>
+    <button id="f01">R0C1</button>
+    <button id="f02">R0C2</button>
+    <button id="f10">R1C0</button>
+    <button id="f11">R1C1</button>
+    <button id="f12">R1C2</button>
+    <button id="f20">R2C0</button>
+    <button id="f21">R2C1</button>
+    <button id="f22">R2C2</button>
+  </div>
+
+  <button id="after">After</button>
+</body>
+</html>

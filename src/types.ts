@@ -6,10 +6,12 @@ export type FocusgroupBehavior =
   | 'menu'
   | 'menubar'
   | 'tree'
+  | 'grid'
   | 'none';
 
 export type FocusgroupDirection = 'inline' | 'block' | 'both';
 export type WrapMode = 'wrap' | 'nowrap';
+export type GridWrapMode = 'none' | 'wrap' | 'flow';
 
 export interface FocusgroupConfig {
   behavior: FocusgroupBehavior;
@@ -17,6 +19,18 @@ export interface FocusgroupConfig {
   wrap: WrapMode;
   memory: boolean;
   raw: string;
+  // Grid-specific wrap modes (only when behavior === 'grid')
+  gridRowWrap: GridWrapMode;
+  gridColWrap: GridWrapMode;
+}
+
+/** 2D grid layout: rows of cells, each cell is a focusable element */
+export interface GridLayout {
+  rows: HTMLElement[][];
+  /** Get the cell at a given row/col, or null if out of bounds */
+  getCell(row: number, col: number): HTMLElement | null;
+  /** Find the row/col position of an element */
+  getPosition(el: HTMLElement): { row: number; col: number } | null;
 }
 
 export interface BehaviorDescriptor {
