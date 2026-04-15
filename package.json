@@ -1,6 +1,6 @@
 {
   "name": "focusgroup-polyfill",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Polyfill for the HTML focusgroup attribute (Open UI proposal)",
   "keywords": [
     "a11y",
